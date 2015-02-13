@@ -1,0 +1,10 @@
+*.out
+*.log
+*.blg
+*.aux
+*.pyc
+*.bbl
+*backup
+*.so
+*.build
+
