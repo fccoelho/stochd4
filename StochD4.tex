@@ -48,9 +48,8 @@ The model permits up to 4 dengue infections
 with reduced susceptibility after the first Dengue episode due to cross 
 immunity. 
 Immunity to each serotype is considered complete and permanent. 
-Figure \ref{fig:sde_blocks} depicts all possible states and state-transitions 
-included in the 
-model.
+Figure \ref{fig:sde_blocks} depicts all 48 possible states and 64 
+state-transitions included in the model.
 
           \begin{figure}
  \centering
@@ -128,7 +127,8 @@ No transition & $1-P(\cdot)^\dag$ & No change & ---\\
 The model is implemented as a continuous time Markov jump process. Let
 $$\overrightarrow{X}(t) = [S(t), I_1(t), I_2(t), \ldots, R_{1234}(t)]$$ 
 be the 
-state of the system at the time $t$. 
+state of the system at the time $t$. $\sum X(t) = N, \forall t$ with $N$ being 
+the population size. 
 The system is written as a forward Kolmogorov differential equation, which in 
 matrix form looks like
 \begin{equation}
@@ -143,19 +143,41 @@ and matrices are ommited due to their large sizes.
 \subsection*{Expected Change and Covariance Matrix}
 
 It is useful to calculate the expected change and the covariance matrix for the 
-changes $\Delta X = [\Delta S, \Delta I_1, \Delta I_2, \ldots, 
-\Delta R_{1234}]^T$. Thus from the probabilities of table \ref{tab:trans},
+changes $\Delta X = [\Delta S, \Delta I_1, \Delta I_2, \Delta I_3, \Delta I_4,$
+$\Delta R_1, \Delta R_2, \Delta R_3, \Delta R_4,\Delta I_{12}, \Delta I_{13},
+\Delta I_{12}, \Delta I_{13}, 
+\Delta I_{14}, \Delta I_{21}, \Delta I_{23}, \Delta I_{24}, \Delta I_{31},$
+$\Delta I_{32}, 
+\Delta I_{34}, \Delta I_{41}, \Delta I_{42}, \Delta I_{43}, \Delta R_{12}, 
+\Delta R_{13}, \Delta R_{14}, \Delta R_{23}, \Delta R_{24}, \Delta R_{34},
+\Delta I_{231}, \Delta I_{241}, \Delta I_{341}, \Delta I_{132}, \Delta I_{142},$
+$\Delta I_{342}, \Delta I_{123}, \Delta I_{143}, \Delta I_{243}, \Delta I_{124},
+\Delta I_{134}, \Delta I_{234}, \Delta R_{123}, \Delta R_{124}, \Delta R_{134},
+\Delta R_{234}, \Delta I_{1234}, \Delta I_{1243}, \Delta I_{1342},$\\
+$\Delta I_{2341},\Delta R_{1234}]^T$.
+
+
+Thus from the probabilities of table \ref{tab:trans},
 
 \begin{equation}
  E(\Delta X)=\sum_X p_i \Delta X_i=
 \begin{pmatrix}
-\beta S I_{*i} \Delta t\\
-\beta S I_{*i} \Delta t\\
-\beta S I_{*i} \Delta t
+-\beta S I_{*1} + \mu N -\mu S\\
+\vdots\\
+\beta S I_{*4} + \mu N -\mu S\\
+\beta S I_{*1} -\sigma I_1 -\mu I_1\\
+\vdots\\
+\beta S I_{*4} -\sigma I_4 -\mu I_4\\
+\sigma I_1 - \beta \delta R_1 I_{*j} -\mu R_1\\
+\vdots\\
+\sigma I_4 - \beta \delta R_4 I_{*j} -\mu R_4\\
+\beta \delta R_i I_{[i]j} - \sigma I_{[i]j} -\mu I_{[i]j}\\ 
+\sigma I_{[i]j} - \beta \delta R_{ij} I_{*k} - \mu R_{ij}\\
+\beta \delta R_{ij} I_{*k} -\sigma I_{[ij]k} -\mu I_{[ij]k}\\ 
  \end{pmatrix}
  \Delta t
 \end{equation}
 
-
-\bibliography{lm1}
+The expected change, $E(\Delta X)$, is a $48\times 1$ vector.
+%\bibliography{lm1}
 \end{document}
