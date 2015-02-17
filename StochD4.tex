@@ -81,43 +81,39 @@ The possible state-transitions and their  propensities are listed in table
 \ref{tab:trans}.
 \begin{table}
 \caption{
-\bf{State-transitions and probabilities: $P(\Delta X(t)|X(t))$}. The 
+{\bf State-transitions and probabilities: $P(\Delta X(t)|X(t))$}. The 
 transitions are summarized below. Fully expanded, the system contemplates 64 
 possible state transitions, as can be verified in figure \ref{fig:sde_blocks}. 
-$^\dag$: $P(\cdot)$ is the sum of the probabilities of all possible state 
-changing transitions.
+$^\dag$: Non-zero elements of $(\Delta X)_i$.
 }
 \label{tab:trans}
 \begin{center}
-\begin{tabular}[c]{l|l|l|l}
+\begin{tabular}[c]{l|l|l|l|l}
 \hline
-Transition & Probability & State Change & Description\\
+$i$ & Transition & Probability, $p_i$ & State Change$^\dag$ & Description\\
 \hline
-$S \rightarrow I_i$ & $\beta S I_{*i} \Delta t$ & $\Delta S(t)=-1,\, \Delta 
-I_i(t) = 1$ 
-& Primary infection \\
-$I_i \rightarrow R_i$ & $\sigma I_i \Delta t$ & $\Delta I_i(t)=-1,\, \Delta 
-R_i(t) = 1$ 
-& Primary recovery\\
-$R_i \rightarrow I_{[i]j}$ & $\beta \delta R_i I_{*j}\Delta t$ & $\Delta 
-R_i(t)=-1,\, 
-\Delta I_{[i]j}(t) = 1$ & Secondary infection\\
-$I_{[i]j} \rightarrow R_{ij}$ & $\sigma I_{[i]j}\Delta t$ &$\Delta 
-I_{[i]j}(t)=-1,\, 
-\Delta R_{ij}(t) = 1$& Secondary recovery\\
-$R_{ij} \rightarrow I_{[ij]k}$ & $\beta \delta R_{ij} I_{*k}\Delta t$ &$\Delta 
-R_{ij}(t)=-1,\, \Delta I_{[ij]k}(t) = 1$& Tertiary infection\\
-$I_{[ij]k} \rightarrow R_{ijk}$ & $\sigma I_{[ij]k}\Delta t$ &$\Delta 
-I_{[ij]k}(t)=-1,\, \Delta R_{ijk}(t) = 1$& Tertiary recovery\\
-$R_{ijk} \rightarrow I_{[ijk]l}$ & $\beta \delta R_{ijk} I_{*l}\Delta t$ 
-&$\Delta 
-R_{ijk}(t)=-1,\, \Delta I_{[ijk]l}(t) = 1$& Quaternary infection\\
-$I_{[ijk]l} \rightarrow R_{ijkl}$ & $\sigma I_{[ijk]l}\Delta t$ & $\Delta 
+$1..4$ & $S \rightarrow I_i$ & $\beta S I_{*i} \Delta t$ & $\Delta S(t)=-1,\, 
+\Delta I_i(t) = 1$ & Primary infection \\
+$5..8$ & $I_i \rightarrow R_i$ & $\sigma I_i \Delta t$ & $\Delta I_i(t)=-1,\, 
+\Delta R_i(t) = 1$ & Primary recovery\\
+$9..20$ & $R_i \rightarrow I_{[i]j}$ & $\beta \delta R_i I_{*j}\Delta t$ & 
+$\Delta R_i(t)=-1,\, \Delta I_{[i]j}(t) = 1$ & Secondary infection\\
+$21..32$ & $I_{[i]j} \rightarrow R_{ij}$ & $\sigma I_{[i]j}\Delta t$ &$\Delta 
+I_{[i]j}(t)=-1,\, \Delta R_{ij}(t) = 1$& Secondary recovery\\
+$33..44$ & $R_{ij} \rightarrow I_{[ij]k}$ & $\beta \delta R_{ij} I_{*k}\Delta 
+t$ & $\Delta R_{ij}(t)=-1,\, \Delta I_{[ij]k}(t) = 1$& Tertiary infection\\
+$45..56$ & $I_{[ij]k} \rightarrow R_{ijk}$ & $\sigma I_{[ij]k}\Delta t$ 
+& $\Delta I_{[ij]k}(t)=-1,\, \Delta R_{ijk}(t) = 1$& Tertiary recovery\\
+$57..60$ & $R_{ijk} \rightarrow I_{[ijk]l}$ & $\beta \delta R_{ijk} 
+I_{*l}\Delta t$ & $\Delta R_{ijk}(t)=-1,\, \Delta I_{[ijk]l}(t) = 1$& Quaternary 
+infection\\
+$61..64$ & $I_{[ijk]l} \rightarrow R_{ijkl}$ & $\sigma I_{[ijk]l}\Delta t$ & 
+$\Delta 
 I_{[ijk]l}(t)=-1,\, \Delta R_{ijkl}(t) = 1$ & Quaternary recovery\\
-$\rightarrow S$ & $\mu N\Delta t$ & $\Delta S = 1$ & Birth\\
-$All \rightarrow$ & $\mu N\Delta t$ & $\Delta S = \Delta I_* = \Delta R_* = -1$ 
-& Death\\
-No transition & $1-P(\cdot)^\dag$ & No change & ---\\
+$65$ & $\rightarrow S$ & $\mu N\Delta t$ & $\Delta S = 1$ & Birth\\
+$66..113$ & $All \rightarrow$ & $\mu N\Delta t$ & $\Delta S = \Delta I_* = 
+\Delta R_* = -1$ & Death\\
+$114$ & No transition & $1-\sum_i p_i$ & No change & ---\\
 \hline
 \end{tabular}
 \end{center}
@@ -160,7 +156,7 @@ $\Delta I_{2341},\Delta R_{1234}]^T$.
 Thus from the probabilities of table \ref{tab:trans},
 
 \begin{equation}
- E(\Delta X)=\sum_X p_i \Delta X_i=
+ E(\Delta X)=\sum_{i=1}^{114} p_i (\Delta X)_i=
 \begin{pmatrix}
 -\beta S I_{*1} + \mu N -\mu S\\
 \vdots\\
@@ -174,10 +170,15 @@ Thus from the probabilities of table \ref{tab:trans},
 \beta \delta R_i I_{[i]j} - \sigma I_{[i]j} -\mu I_{[i]j}\\ 
 \sigma I_{[i]j} - \beta \delta R_{ij} I_{*k} - \mu R_{ij}\\
 \beta \delta R_{ij} I_{*k} -\sigma I_{[ij]k} -\mu I_{[ij]k}\\ 
- \end{pmatrix}
+\sigma I_{[ij]k} - \beta \delta R_{ijk} I_{*l} -\mu R_{ijk}\\
+\beta \delta R_{ijk} I_{*l} - \sigma I_{[ijk]l} - \mu I_{[ijk]l} \\
+\sigma I_{[ijk]l} - \mu R_{1234}
+\end{pmatrix}
  \Delta t
 \end{equation}
 
-The expected change, $E(\Delta X)$, is a $48\times 1$ vector.
+The expected change, $E(\Delta X)$, is a $48\times 1$ vector. The covariance 
+matrix is a $48\times 48$ matrix, $\Sigma(\Delta X)= \sum_{i=1}^{114} p_i 
+(\Delta X)_i (\Delta X)_i^T$
 %\bibliography{lm1}
 \end{document}
