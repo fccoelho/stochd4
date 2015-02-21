@@ -169,9 +169,18 @@ matrix form looks like
 \end{equation}
 
 Where $p_i(t)$ is  the vector of transition probabilities (given in table 
-\ref{tab:trans}) and Q is the generator matrix, whose non-zero values are also 
-given in table \ref{tab:trans} (in the state change column). The full formula 
+\ref{tab:trans}) and Q is the generator matrix, whose  values represent the 
+transition rates between all possible states of the system. The full formula 
 and matrices are ommited due to their large sizes.
+
+The model can also represented as a system of Itô stochastic differential 
+equations. To derive the equivalent system of Itô SDEs, we follow the procedure 
+of \citet{allen_modeling_2007}. 
+
+The procedure starts with the identification of the all the possible 
+transitions of the system's state and the probabilities associated with them, 
+which we have already done (Table \ref{tab:trans}). The second step is to 
+derive the expectation and covariance for these changes.
 
 \subsection*{Expected Change and Covariance Matrix}
 
@@ -215,7 +224,50 @@ Thus from the probabilities of table \ref{tab:trans},
 \end{equation}
 
 The expected change, $E(\Delta X)$, is a $48\times 1$ vector. The covariance 
-matrix is a $48\times 48$ matrix, $\Sigma(\Delta X)= \sum_{i=1}^{114} p_i 
-(\Delta X)_i (\Delta X)_i^T$
-%\bibliography{lm1}
+matrix is a $48\times 48$ matrix, $\Sigma(\Delta X)= E([\Delta X][\Delta X]^T) 
+=\sum_{i=1}^{114} p_i (\Delta X)_i (\Delta X)_i^T = V \Delta t$ (see 
+\citet{allen_modeling_2007} for details).
+
+Itô stochastic differential equations have the following general form:
+
+\begin{equation}
+\label{eq:ito1}
+ d X(t) = \mu(X(t),t) dt + S(X(t),t) dW(t)
+\end{equation}
+
+where $W(t)$ is a vector of independent Wiener processes. It turns out that the 
+diffusion matrix $S=\sqrt{V} = \sqrt{\Sigma/\Delta t}$. In order to avoid 
+having to write down V to take its square root, we will use an equivalent 
+formulation for \ref{eq:ito1}
+
+\begin{equation}
+\label{eq:ito2}
+ d X(t) = \mu(X(t),t) dt + B(X(t),t) dW^*(t)
+\end{equation}
+
+To compute $B$, we must first denote each change in table \ref{tab:trans}, 
+$(\Delta X)_i$ as $(\Delta_{1i}, \Delta_{2i}, \ldots, \Delta_{48i})$ which is 
+equivalent to writing $(\Delta_{Si}, \Delta_{I_1i}, \ldots, 
+\Delta_{R_{1234}i})$, as each component represents the amount and direction 
+(sign)  of the change in all state variables. The we can define each $(i,j)$ 
+element in matrix B as:
+
+\begin{equation}
+ B_{ij} = \Delta_{ij}\sqrt{\frac{p_j}{\Delta t}}
+\end{equation}
+
+$B$ is then a $48 \times 113$ matrix, whereas $S$ is a $48 \times 48$ matrix. 
+Smaller but harder to compute. It can be shown that $B B^T = V = S^2$.
+
+\section*{Numerical simulations}
+
+There are different approaches to simulate the proposed stochastic  models, the 
+Kolmogorov version, can be simulated using Gillespie's algorithm which works 
+well for small population sizes but becomes unwieldy for larger populations. 
+
+The SDE version however does not suffer from these scalability issues, with a 
+number of solvers available for their simulation 
+\citep{higham_algorithmic_2001}.
+
+\bibliography{stochd}
 \end{document}
