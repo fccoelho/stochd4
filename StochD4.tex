@@ -9,6 +9,7 @@
 \usepackage{amsmath}
 \usepackage{mathtools} 
 \usepackage{amssymb}
+\usepackage{empheq}
 \usepackage{indentfirst}
 \usepackage[authoryear,round]{natbib}
 \bibliographystyle{apalike}
@@ -19,7 +20,7 @@
 % \usetikzlibrary{arrows}
 %%%%
 \title{
-Stochastic Multistrain Dengue model
+Stochastic Multistrain Dengue Modeling
 }           
 \author{
 Flavio Code\c{c}o Coelho \\
@@ -33,11 +34,17 @@ Luiz Max de Carvalho \\
 \def \rr {$R_{t}\ $}
 
 
-\begin{document}                                  
-
-
-%
+\begin{document}   
 \maketitle
+\begin{abstract}
+ We proposed and analize a full multistrain Stochastic model for studying 
+Dengue Dynamics. The model is presented both as a Continuous-time markov 
+process and as a set of Itô stochastic differential equations. Sugestions of 
+how to explore the dynamics numerically is also provided, along with source 
+code examples. 
+\end{abstract}
+
+\section*{Introduction}
 
 
 \section*{Multi-strain dynamics}
@@ -51,6 +58,28 @@ Immunity to each serotype is considered complete and permanent.
 Figure \ref{fig:sde_blocks} depicts all 48 possible states and 64 
 state-transitions included in the model.
 
+\subsection*{Deterministic Model}
+
+The derivation of the stochastic model is based on the deterministic ordinary 
+differential equations below
+\begin{empheq}[left=\empheqlbrace]{align}
+ \frac{dS}{dt} &= -\beta S I_{*i} -\mu S + \mu N \\
+ \frac{dI_{i}}{dt} &= \beta S I_{*i} - (\sigma +\mu) I_i \\
+ \frac{dI_{[i]j}}{dt} &= \beta \delta R_i I_{*j} - (\sigma +\mu) I_{[i]j} \\
+ \frac{dI_{[ij]k}}{dt} &= \beta \delta R_ij I_{*k} - (\sigma +\mu) I_{[ij]k} \\
+ \frac{dI_{[ijk]l}}{dt} &= \beta \delta R_ijk I_{*l} - (\sigma +\mu) 
+I_{[ijk]l}\\
+ \frac{dR_i}{dt} &= \sigma I_i - \delta R_i (I_{*j} + I_{*k} + I_{*l}) -\mu R_i 
+\\
+ \frac{dR_{ij}}{dt} &= \sigma I_{ij} - \delta R_{ij} (I_{*k} + I_{*l}) - \mu 
+R_{ij}\\
+ \frac{dR_{ijk}}{dt} &= \sigma I_{ijk} - \delta R_{ijk} I_{*l} -\mu R_{ijk} \\
+ \frac{dR_{ijkl}}{dt} &= \sigma I_{ijkl} - \mu R_{ijkl} 
+\end{empheq}
+
+
+
+
           \begin{figure}
  \centering
  \includegraphics[width=16cm]{Dengue4.png}
@@ -62,10 +91,13 @@ are also represented by colored arrows matching the virus type.}
 \end{figure}
 
 
-Let $S$ be individuals susceptible to all 4 types of dengue, $I_i$ infectious 
-with Dengue type $i$ and $R_i$ individuals recovered from Dengue type $i$. 
+Where $S$ are individuals susceptible to all 4 types of dengue, $I_i$ 
+infectious 
+with Dengue type $i$, $R_i$ individuals recovered from Dengue type $i$ and 
+$N(t) = S(t) + I_*(t) + R_*(t)$ is the total population size at time $t$. 
 Infectious individuals already on their secondary and later Dengue infections 
-are represented by multiple indices. For example, $I_{[23]1}$ is an individual 
+are represented by indices $\{i,j,k,l\}$ which can take values in the close 
+interval $(1,4)$. For example, $I_{[23]1}$ is an individual 
 which has had Dengues type 2 and 3 in the past -- and therefore is immune to 
 them -- and is currently transmitting Dengue 1. 
 The index outside the bracket 
@@ -77,8 +109,12 @@ to 3 in length.
 All individuals are born to the $S$ state and birth and death 
 rates are equal.
 
-The possible state-transitions and their  propensities are listed in table 
+\subsection*{Stochastic Model}
+Let's now assume that $S(t)$, $I_*(t)$ and $R_*(t)$ are random variables 
+representing the state of a stochastic process.
+The possible state-transitions and their  probabilities are listed in table 
 \ref{tab:trans}.
+
 \begin{table}
 \caption{
 {\bf State-transitions and probabilities: $P(\Delta X(t)|X(t))$}. The 
@@ -120,7 +156,8 @@ $114$ & No transition & $1-\sum_i p_i$ & No change & ---\\
 
 \end{table}
 
-The model is implemented as a continuous time Markov jump process. Let
+The stochastic model can be described as a continuous time Markov jump process. 
+Let
 $$\overrightarrow{X}(t) = [S(t), I_1(t), I_2(t), \ldots, R_{1234}(t)]$$ 
 be the 
 state of the system at the time $t$. $\sum X(t) = N, \forall t$ with $N$ being 
@@ -128,13 +165,22 @@ the population size.
 The system is written as a forward Kolmogorov differential equation, which in 
 matrix form looks like
 \begin{equation}
-\frac{dP_X(t)}{dt} = Q P_X(t) 
+\frac{dp_i(t)}{dt} = Q p_i(t) 
 \end{equation}
 
-Where $P_X(t)$ is  the matrix of transition probabilities (given in table 
-\ref{tab:trans}) and Q is the generator matrix, whose non-zero values are also 
-given in table \ref{tab:trans} (in the state change column). The full formula 
+Where $p_i(t)$ is  the vector of transition probabilities (given in table 
+\ref{tab:trans}) and Q is the generator matrix, whose  values represent the 
+transition rates between all possible states of the system. The full formula 
 and matrices are ommited due to their large sizes.
+
+The model can also represented as a system of Itô stochastic differential 
+equations. To derive the equivalent system of Itô SDEs, we follow the procedure 
+of \citet{allen_modeling_2007}. 
+
+The procedure starts with the identification of the all the possible 
+transitions of the system's state and the probabilities associated with them, 
+which we have already done (Table \ref{tab:trans}). The second step is to 
+derive the expectation and covariance for these changes.
 
 \subsection*{Expected Change and Covariance Matrix}
 
@@ -178,7 +224,50 @@ Thus from the probabilities of table \ref{tab:trans},
 \end{equation}
 
 The expected change, $E(\Delta X)$, is a $48\times 1$ vector. The covariance 
-matrix is a $48\times 48$ matrix, $\Sigma(\Delta X)= \sum_{i=1}^{114} p_i 
-(\Delta X)_i (\Delta X)_i^T$
-%\bibliography{lm1}
+matrix is a $48\times 48$ matrix, $\Sigma(\Delta X)= E([\Delta X][\Delta X]^T) 
+=\sum_{i=1}^{114} p_i (\Delta X)_i (\Delta X)_i^T = V \Delta t$ (see 
+\citet{allen_modeling_2007} for details).
+
+Itô stochastic differential equations have the following general form:
+
+\begin{equation}
+\label{eq:ito1}
+ d X(t) = \mu(X(t),t) dt + S(X(t),t) dW(t)
+\end{equation}
+
+where $W(t)$ is a vector of independent Wiener processes. It turns out that the 
+diffusion matrix $S=\sqrt{V} = \sqrt{\Sigma/\Delta t}$. In order to avoid 
+having to write down V to take its square root, we will use an equivalent 
+formulation for \ref{eq:ito1}
+
+\begin{equation}
+\label{eq:ito2}
+ d X(t) = \mu(X(t),t) dt + B(X(t),t) dW^*(t)
+\end{equation}
+
+To compute $B$, we must first denote each change in table \ref{tab:trans}, 
+$(\Delta X)_i$ as $(\Delta_{1i}, \Delta_{2i}, \ldots, \Delta_{48i})$ which is 
+equivalent to writing $(\Delta_{Si}, \Delta_{I_1i}, \ldots, 
+\Delta_{R_{1234}i})$, as each component represents the amount and direction 
+(sign)  of the change in all state variables. The we can define each $(i,j)$ 
+element in matrix B as:
+
+\begin{equation}
+ B_{ij} = \Delta_{ij}\sqrt{\frac{p_j}{\Delta t}}
+\end{equation}
+
+$B$ is then a $48 \times 113$ matrix, whereas $S$ is a $48 \times 48$ matrix. 
+Smaller but harder to compute. It can be shown that $B B^T = V = S^2$.
+
+\section*{Numerical simulations}
+
+There are different approaches to simulate the proposed stochastic  models, the 
+Kolmogorov version, can be simulated using Gillespie's algorithm which works 
+well for small population sizes but becomes unwieldy for larger populations. 
+
+The SDE version however does not suffer from these scalability issues, with a 
+number of solvers available for their simulation 
+\citep{higham_algorithmic_2001}.
+
+\bibliography{stochd}
 \end{document}
