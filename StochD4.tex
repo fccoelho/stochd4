@@ -6,9 +6,10 @@
 \usepackage{url}
 \usepackage{hyperref}
 \hypersetup{colorlinks=true,citecolor=blue}
-\usepackage{amsmath}
 \usepackage{mathtools} 
+\usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{rotating}
 \usepackage{empheq}
 \usepackage{indentfirst}
 \usepackage[authoryear,round]{natbib}
@@ -235,7 +236,8 @@ Itô stochastic differential equations have the following general form:
  d X(t) = \mu(X(t),t) dt + S(X(t),t) dW(t)
 \end{equation}
 
-where $W(t)$ is a vector of independent Wiener processes. It turns out that the 
+where $W(t)$ is a $48\times1$ vector of independent Wiener processes. It turns 
+out that the 
 diffusion matrix $S=\sqrt{V} = \sqrt{\Sigma/\Delta t}$. In order to avoid 
 having to write down V to take its square root, we will use an equivalent 
 formulation for \ref{eq:ito1}
@@ -258,6 +260,9 @@ element in matrix B as:
 
 $B$ is then a $48 \times 113$ matrix, whereas $S$ is a $48 \times 48$ matrix. 
 Smaller but harder to compute. It can be shown that $B B^T = V = S^2$.
+
+\include{bmatrix}
+
 
 \section*{Numerical simulations}
 
