@@ -15,7 +15,7 @@ def plot(t,s,l):
     s = np.vstack(s).T
     co = cycle(['b', 'g', 'r', 'c', 'm', 'y', 'k'])
     sy = cycle(['o', '^', '>', '<', 's', '*', '+', '1'])
-    print s.shape, len(t)
+    print(s.shape, len(t))
     for i in range(s.shape[1]):
         P.plot(t, s[:,i], co.next()+sy.next()+'-')
     P.legend(l, loc=0)

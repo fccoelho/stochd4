@@ -6,9 +6,10 @@ Created on 09/03/15
 by fccoelho
 license: GPL V3 or Later
 """
-
+import sympy
 from sympy import symbols, init_printing, pprint, sqrt
 from sympy.matrices import Matrix, zeros
+from ITOSolvers import EulerMaruyamaMatrix
 
 init_printing()
 
@@ -80,7 +81,7 @@ p = [
 p = Matrix(p)
 pprint(p[:8, 0])
 
-# Creating  the change matrix, Delta(X_i)
+# Creating  the changes matrix, Delta(X_i)
 
 changes = zeros(114, 48)  # 114th line is no-event
 for i in range(113):
@@ -129,6 +130,14 @@ for i in range(113):
 pprint(changes)
 print(changes.shape)
 
+# Computing the Expectation Vector
+
+E = zeros(48, 1)
+for i in range(113):
+    E += p[i, 0]*changes.T[:, i]
+
+pprint(E)
+
 # Computing the diffusion matrix
 
 B = zeros(48, 113)
@@ -138,3 +147,8 @@ for i in range(48):
         B[i, j] = sqrt(p[j, 0] * changes.T[i, j])
 
 pprint(B)
+
+# Simulating using Euler-Maruyama
+N = 500
+inits = sympy.Matrix([[10, 50, 50, 50, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 48000]])
+xvals, sol = EulerMaruyamaMatrix(0, inits, 500, E, B, )
