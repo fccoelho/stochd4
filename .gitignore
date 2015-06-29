@@ -7,4 +7,6 @@
 *backup
 *.so
 *.build
+*.png
+*.svg
 
