@@ -17,7 +17,7 @@ Model4st = dst.args(name='Dengue4')
 # Parameters
 Model4st.pars = {
     'beta': 400/52,
-    #'N': 50000,
+    'N': 50000,
     'delta': 0.2,  # Cross-immunity protection
     'mu': 1/(70*52),  # Mortality rate
     'sigma': 1/1.5  # recovery rate
@@ -136,34 +136,46 @@ Model4st.varspecs = {
     'I_2341': 'beta*delta*R_234*(I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341)\
             -sigma*I_2341 - mu*I_2341',
     'R_1234': 'sigma*(I_1234+I_1243+I_1342+I_2341) - mu*R_1234',
-    'I_a1': 'I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341',
-    'I_a2': 'I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342',
-    'I_a3': 'I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243',
-    'I_a4': 'I_4+I_14+I_24+I_34+I_124+I_134+I_234+I_1234',
-    'I_all': 'I_a1+I_a2+I_a3+I_a4',
-    'R_all': 'R_1+R_2+R_3+R_4+R_12+R_13+R_14+R_23+R_24+R_34+R_123+R_124+R_134+R_234+R_1234',
-    'N': 'S+I_all+R_all'
+    # 'I_a1': 'I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341',
+    # 'I_a2': 'I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342',
+    # 'I_a3': 'I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243',
+    # 'I_a4': 'I_4+I_14+I_24+I_34+I_124+I_134+I_234+I_1234',
+    # 'I_all': 'I_a1+I_a2+I_a3+I_a4',
+    # 'R_all': 'R_1+R_2+R_3+R_4+R_12+R_13+R_14+R_23+R_24+R_34+R_123+R_124+R_134+R_234+R_1234',
+    # 'N': 'S+I_all+R_all'
 }
 
 # Initial conditions
 Model4st.ics = {'S': 48000, 'I_1': 500, 'I_2': 500, 'I_3': 500, 'I_4': 500, 'R_1': 0, 'R_2': 0, 'R_3': 0, 'R_4': 0, 'I_12': 0, 'I_13': 0, 'I_14': 0, 'I_21': 0, 'I_23': 0, 'I_24': 0, 'I_31': 0, 'I_32': 0, 'I_34': 0, 'I_41': 0, 'I_42': 0, 'I_43': 0, 'R_12': 0, 'R_13': 0, 'R_14': 0, 'R_23': 0, 'R_24': 0, 'R_34': 0, 'I_231': 0, 'I_241': 0, 'I_341': 0, 'I_132': 0, 'I_142': 0, 'I_342': 0, 'I_123': 0, 'I_143': 0, 'I_243':0, 'I_124': 0, 'I_134': 0,
-     'I_234': 0, 'R_123': 0, 'R_124': 0, 'R_134': 0, 'R_234': 0, 'I_1234': 0, 'I_1243': 0, 'I_1342': 0, 'I_1342': 0, 'I_2341': 0, 'R_1234': 0, 'I_a1': 0, 'I_a2': 0, 'I_a3': 0, 'I_a4': 0, 'I_all': 2000, 'R_all': 0, 'N': 50000}
+     'I_234': 0, 'R_123': 0, 'R_124': 0, 'R_134': 0, 'R_234': 0, 'I_1234': 0, 'I_1243': 0, 'I_1342': 0, 'I_1342': 0, 'I_2341': 0, 'R_1234': 0,
+# 'I_a1': 0, 'I_a2': 0, 'I_a3': 0, 'I_a4': 0, 'I_all': 2000, 'R_all': 0, 'N': 50000
+                }
 
 # Simulation
 dt = 0.1
-tf = 3
+tf = 10
 Model4st.tdomain = [0, tf]             # set the range of integration.
-ode  = dst.Generator.Dopri_ODEsystem(Model4st)  # an instance of the 'Generator' class.
+ode  = dst.Generator.Dopri_ODEsystem(Model4st)
+ode.set(algparams={'max_pts': 2000000})
 traj = ode.compute('Dengue')              # integrate ODE
 pts  = traj.sample(dt=dt)
 
 
 # PyPlot commands
-plt.plot(range(0, tf, dt), pts['S'], label='S');
-plt.plot(range(0, tf, dt), pts['I_all'], label='I')
+# plt.plot(pts['I_a3'], label='I_a3');
+for k in pts.keys():
+    if k =="I_a4": continue
+    if k.startswith('I_') and k.endswith('4'):
+        plt.plot(pts[k], label=k)
+# plt.plot(pts['I_a1'], label='I_a1')
+# plt.plot(pts['I_a2'], label='I_a2')
+# plt.plot(pts['I_a3'], label='I_a3')
+# plt.plot(pts['I_a4'], label='I_a4')
+# plt.plot(pts['R_all'], label='R')
 plt.xlabel('t');                              # Axes labels
 plt.ylabel('individuals');                           # ...
 #plt.ylim([0,65]);                                # Range of the y axis
-plt.title(ode.name);
+plt.title(ode.name)
+plt.legend(loc=0)
 plt.grid()
 plt.show()
