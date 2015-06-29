@@ -47,14 +47,26 @@ code examples.
 
 \section*{Introduction}
 
+Dengue fever is a arthropod-borne viral disease which causes between 50 and 
+100 million cases annualy around the world.
+
+Dengue is caused by a flavivirus of which 5 different strains have been 
+identified so far. These strains are distinguished by their antigenicity and 
+are thus referred to as serotypes. Most epidemics around the globe are caused 
+by a combination of the first four serotypes, DENV-1, DENV-2, DENV-3 and DENV-4.
+
+The dengue viruses provide long-lasting immunity which is restricted to the 
+particular serotype the individual has been exposed to, with the display of a 
+partial immunity to the other types (cross-immunity).
+
 
 \section*{Multi-strain dynamics}
 
 In this paper we propose a stochastic 4-serotype SIR model with 
 cross-immunity to describe multi-strain Dengue dynamics. 
-The model permits up to 4 dengue infections 
-with reduced susceptibility after the first Dengue episode due to cross 
-immunity. 
+The model allows for up to 4 dengue infections of the same individual
+with reduction of susceptibility, denoted by $\delta$, after the first Dengue 
+episode due to cross immunity. 
 Immunity to each serotype is considered complete and permanent. 
 Figure \ref{fig:sde_blocks} depicts all 48 possible states and 64 
 state-transitions included in the model.
@@ -186,18 +198,26 @@ derive the expectation and covariance for these changes.
 \subsection*{Expected Change and Covariance Matrix}
 
 It is useful to calculate the expected change and the covariance matrix for the 
-changes $\Delta X = [\Delta S, \Delta I_1, \Delta I_2, \Delta I_3, \Delta I_4,$
-$\Delta R_1, \Delta R_2, \Delta R_3, \Delta R_4,\Delta I_{12}, \Delta I_{13},
-\Delta I_{12}, \Delta I_{13}, 
-\Delta I_{14}, \Delta I_{21}, \Delta I_{23}, \Delta I_{24}, \Delta I_{31},$
-$\Delta I_{32}, 
-\Delta I_{34}, \Delta I_{41}, \Delta I_{42}, \Delta I_{43}, \Delta R_{12}, 
+changes 
+\begin{align*}
+ \Delta X = [&\Delta S, \Delta I_1, \Delta I_2, \Delta I_3, \Delta I_4,
+ \Delta R_1, \Delta R_2, \Delta R_3, \Delta R_4, \Delta I_{12}, \Delta I_{13}, 
+\Delta I_{14},\\
+&\Delta I_{21}, \Delta I_{23}, \Delta I_{24}, \Delta I_{31},\Delta I_{32}, 
+\Delta I_{34}, \Delta I_{41}, \Delta I_{42}, \Delta I_{43},\\
+&\Delta R_{12}, 
 \Delta R_{13}, \Delta R_{14}, \Delta R_{23}, \Delta R_{24}, \Delta R_{34},
-\Delta I_{231}, \Delta I_{241}, \Delta I_{341}, \Delta I_{132}, \Delta I_{142},$
-$\Delta I_{342}, \Delta I_{123}, \Delta I_{143}, \Delta I_{243}, \Delta I_{124},
-\Delta I_{134}, \Delta I_{234}, \Delta R_{123}, \Delta R_{124}, \Delta R_{134},
-\Delta R_{234}, \Delta I_{1234}, \Delta I_{1243}, \Delta I_{1342},$\\
-$\Delta I_{2341},\Delta R_{1234}]^T$.
+\Delta I_{231}, \Delta I_{241},\\ 
+&\Delta I_{341}, \Delta I_{132}, \Delta I_{142},\Delta I_{342}, \Delta I_{123}, 
+\Delta I_{143}, \Delta I_{243}, \Delta I_{124},\\
+&\Delta I_{134}, \Delta I_{234}, \Delta R_{123}, \Delta R_{124}, \Delta R_{134},
+\Delta R_{234},\\ 
+&\Delta I_{1234}, \Delta I_{1243}, \Delta I_{1342},\Delta I_{2341},\Delta 
+R_{1234}]^T
+\end{align*}
+
+ 
+
 
 
 Thus from the probabilities of table \ref{tab:trans},
@@ -205,16 +225,14 @@ Thus from the probabilities of table \ref{tab:trans},
 \begin{equation}
  E(\Delta X)=\sum_{i=1}^{114} p_i (\Delta X)_i=
 \begin{pmatrix}
--\beta S I_{*1} + \mu N -\mu S\\
-\vdots\\
-\beta S I_{*4} + \mu N -\mu S\\
+-\beta S \sum_{i=1}^4 I_{*1} + \mu N -\mu S\\
 \beta S I_{*1} -\sigma I_1 -\mu I_1\\
 \vdots\\
 \beta S I_{*4} -\sigma I_4 -\mu I_4\\
-\sigma I_1 - \beta \delta R_1 I_{*j} -\mu R_1\\
+\sigma I_1 - \beta \delta R_1 \sum_{j\neq 1} I_{*j} -\mu R_1\\
 \vdots\\
-\sigma I_4 - \beta \delta R_4 I_{*j} -\mu R_4\\
-\beta \delta R_i I_{[i]j} - \sigma I_{[i]j} -\mu I_{[i]j}\\ 
+\sigma I_4 - \beta \delta R_4 \sum_{j\neq 4} I_{*j} -\mu R_4\\
+\beta \delta R_i I_{*j} - \sigma I_{[i]j} -\mu I_{[i]j}\\ 
 \sigma I_{[i]j} - \beta \delta R_{ij} I_{*k} - \mu R_{ij}\\
 \beta \delta R_{ij} I_{*k} -\sigma I_{[ij]k} -\mu I_{[ij]k}\\ 
 \sigma I_{[ij]k} - \beta \delta R_{ijk} I_{*l} -\mu R_{ijk}\\
@@ -260,9 +278,10 @@ element in matrix B as:
 
 $B$ is then a $48 \times 113$ matrix, whereas $S$ is a $48 \times 48$ matrix. 
 Although $B$ is a larger matrix, its easier to compute as it doesn't require 
-taking the square root of a matrix. It can be shown that $B B^T = V = S^2$.
+taking the square root of a matrix. It can be shown that $B\times B^T = V = 
+S^2$.
 
-\include{bmatrix}
+%\include{bmatrix}
 
 
 \section*{Numerical simulations}
@@ -272,8 +291,29 @@ Kolmogorov version, can be simulated using Gillespie's algorithm which works
 well for small population sizes but becomes unwieldy for larger populations. 
 
 The SDE version however does not suffer from these scalability issues, with a 
-number of solvers available for their simulation 
+number of solvers available for their simulation
 \citep{higham_algorithmic_2001}.
+
+The parameter values used for the numerical simulations can be found on table 
+
+{%
+\newcommand{\mc}[3]{\multicolumn{#1}{#2}{#3}}
+\begin{table}
+\caption{Parameters used for simulations}
+\label{tab:pars}
+\begin{center}
+\begin{tabular}{lcl}
+Parameter & Value & Description\\ \hline
+$\beta$ & 400/52 & Transmission rate\\
+$\delta$ & 0.2 & ×\\
+$\sigma$ & \mc{1}{l}{1/1.5} & ×\\
+$\mu$ & \mc{1}{l}{$\frac{1}{70\times 52}$} & mortality rate\\
+$N$ & \mc{1}{l}{50000} & Population size\\\hline
+\end{tabular}
+\end{center}
+\end{table}
+}%
+
 
 \bibliography{stochd}
 \end{document}
