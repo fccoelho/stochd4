@@ -36,10 +36,12 @@ double signum(double x)
 
 
 /* Variable, aux variable, parameter, and input definitions: */ 
-#define beta	p_[0]
-#define delta	p_[1]
-#define mu	p_[2]
-#define sigma	p_[3]
+#define N	p_[0]
+#define beta	p_[1]
+#define delta	p_[2]
+#define im	p_[3]
+#define mu	p_[4]
+#define sigma	p_[5]
 #define I_1	Y_[0]
 #define I_12	Y_[1]
 #define I_123	Y_[2]
@@ -72,29 +74,22 @@ double signum(double x)
 #define I_41	Y_[29]
 #define I_42	Y_[30]
 #define I_43	Y_[31]
-#define I_a1	Y_[32]
-#define I_a2	Y_[33]
-#define I_a3	Y_[34]
-#define I_a4	Y_[35]
-#define I_all	Y_[36]
-#define N	Y_[37]
-#define R_1	Y_[38]
-#define R_12	Y_[39]
-#define R_123	Y_[40]
-#define R_1234	Y_[41]
-#define R_124	Y_[42]
-#define R_13	Y_[43]
-#define R_134	Y_[44]
-#define R_14	Y_[45]
-#define R_2	Y_[46]
-#define R_23	Y_[47]
-#define R_234	Y_[48]
-#define R_24	Y_[49]
-#define R_3	Y_[50]
-#define R_34	Y_[51]
-#define R_4	Y_[52]
-#define R_all	Y_[53]
-#define S	Y_[54]
+#define R_1	Y_[32]
+#define R_12	Y_[33]
+#define R_123	Y_[34]
+#define R_1234	Y_[35]
+#define R_124	Y_[36]
+#define R_13	Y_[37]
+#define R_134	Y_[38]
+#define R_14	Y_[39]
+#define R_2	Y_[40]
+#define R_23	Y_[41]
+#define R_234	Y_[42]
+#define R_24	Y_[43]
+#define R_3	Y_[44]
+#define R_34	Y_[45]
+#define R_4	Y_[46]
+#define S	Y_[47]
 
 
 double __maxof2(double e1_, double e2_, double *p_, double *wk_, double *xv_);
@@ -107,6 +102,9 @@ double __rhs_if(int cond_, double e1_, double e2_, double *p_, double *wk_, doub
 double getbound(char *name, int which_bd, double *p_, double *wk_, double *xv_);
 double globalindepvar(double t, double *p_, double *wk_, double *xv_);
 double initcond(char *varname, double *p_, double *wk_, double *xv_);
+double m1(double __t__, double *p_, double *wk_, double *xv_);
+double m2(double __t__, double *p_, double *wk_, double *xv_);
+double m3(double __t__, double *p_, double *wk_, double *xv_);
 int getindex(char *name, double *p_, double *wk_, double *xv_);
 int heav(double x_, double *p_, double *wk_, double *xv_);
 
@@ -126,7 +124,7 @@ int N_EXTINPUTS = 0;
 
 void vfieldfunc(unsigned n_, unsigned np_, double t, double *Y_, double *p_, double *f_, unsigned wkn_, double *wk_, unsigned xvn_, double *xv_){
 
-f_[0] = beta*S*(I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341)-sigma*I_1-mu*I_1;
+f_[0] = m1(t, p_, wk_, xv_)+beta*S*(I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341)-sigma*I_1-mu*I_1;
 f_[1] = beta*delta*R_1*(I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342)-sigma*I_12-mu*I_12;
 f_[2] = beta*delta*R_12*(I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243)-sigma*I_123-mu*I_123;
 f_[3] = beta*delta*R_123*(I_4+I_14+I_24+I_34+I_124+I_134+I_234+I_1234)-sigma*I_1234-mu*I_1234;
@@ -139,7 +137,7 @@ f_[9] = beta*delta*R_134*(I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342)-sigma*I_1
 f_[10] = beta*delta*R_1*(I_4+I_14+I_24+I_34+I_124+I_134+I_234+I_1234)-sigma*I_14-mu*I_14;
 f_[11] = beta*delta*R_14*(I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342)-sigma*I_142-mu*I_142;
 f_[12] = beta*delta*R_14*(I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243)-sigma*I_143-mu*I_143;
-f_[13] = beta*S*(I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342)-sigma*I_2-mu*I_2;
+f_[13] = m2(t, p_, wk_, xv_)+beta*S*(I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342)-sigma*I_2-mu*I_2;
 f_[14] = beta*delta*R_2*(I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341)-sigma*I_21-mu*I_21;
 f_[15] = beta*delta*R_2*(I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243)-sigma*I_23-mu*I_23;
 f_[16] = beta*delta*R_23*(I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341)-sigma*I_231-mu*I_231;
@@ -148,7 +146,7 @@ f_[18] = beta*delta*R_234*(I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341)-sigma*I_
 f_[19] = beta*delta*R_2*(I_4+I_14+I_24+I_34+I_124+I_134+I_234+I_1234)-sigma*I_24-mu*I_24;
 f_[20] = beta*delta*R_24*(I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341)-sigma*I_241-mu*I_241;
 f_[21] = beta*delta*R_24*(I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243)-sigma*I_243-mu*I_243;
-f_[22] = beta*S*(I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243)-sigma*I_3-mu*I_3;
+f_[22] = m3(t, p_, wk_, xv_)+beta*S*(I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243)-sigma*I_3-mu*I_3;
 f_[23] = beta*delta*R_3*(I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341)-sigma*I_31-mu*I_31;
 f_[24] = beta*delta*R_3*(I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342)-sigma*I_32-mu*I_32;
 f_[25] = beta*delta*R_3*(I_4+I_14+I_24+I_34+I_124+I_134+I_234+I_1234)-sigma*I_34-mu*I_34;
@@ -158,29 +156,22 @@ f_[28] = beta*S*(I_4+I_14+I_24+I_34+I_124+I_134+I_234+I_1234)-sigma*I_4-mu*I_4;
 f_[29] = beta*delta*R_4*(I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341)-sigma*I_41-mu*I_41;
 f_[30] = beta*delta*R_4*(I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342)-sigma*I_42-mu*I_42;
 f_[31] = beta*delta*R_4*(I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243)-sigma*I_43-mu*I_43;
-f_[32] = I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341;
-f_[33] = I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342;
-f_[34] = I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243;
-f_[35] = I_4+I_14+I_24+I_34+I_124+I_134+I_234+I_1234;
-f_[36] = I_a1+I_a2+I_a3+I_a4;
-f_[37] = S+I_all+R_all;
-f_[38] = sigma*I_1-beta*delta*R_1*(I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342+I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243+I_4+I_14+I_24+I_34+I_124+I_134+I_234+I_1234)-mu*R_1;
-f_[39] = sigma*(I_12+I_21)-beta*delta*R_12*(I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243+I_4+I_14+I_24+I_34+I_124+I_134+I_234+I_1234)-mu*R_12;
-f_[40] = sigma*(I_123+I_132+I_231)-beta*delta*R_123*(I_4+I_14+I_24+I_34+I_124+I_134+I_234+I_1234)-mu*R_123;
-f_[41] = sigma*(I_1234+I_1243+I_1342+I_2341)-mu*R_1234;
-f_[42] = sigma*(I_124+I_241+I_142)-beta*delta*R_124*(I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243)-mu*R_124;
-f_[43] = sigma*(I_13+I_31)-beta*delta*R_13*(I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342+I_4+I_14+I_24+I_34+I_124+I_134+I_234+I_1234)-mu*R_13;
-f_[44] = sigma*(I_134+I_341+I_143)-beta*delta*R_134*(I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342)-mu*R_134;
-f_[45] = sigma*(I_14+I_41)-beta*delta*R_14*(I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342+I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243)-mu*R_14;
-f_[46] = sigma*I_2-beta*delta*R_2*(I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341+I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243+I_4+I_14+I_24+I_34+I_124+I_134+I_234+I_1234)-mu*R_2;
-f_[47] = sigma*(I_23+I_32)-beta*delta*R_23*(I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341+I_4+I_14+I_24+I_34+I_124+I_134+I_234+I_1234)-mu*R_23;
-f_[48] = sigma*(I_234+I_342+I_243)-beta*delta*R_234*(I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342)-mu*R_134;
-f_[49] = sigma*(I_24+I_42)-beta*delta*R_24*(I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341+I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243)-mu*R_24;
-f_[50] = sigma*I_3-beta*delta*R_3*(I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341+I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342+I_4+I_14+I_24+I_34+I_124+I_134+I_234+I_1234)-mu*R_3;
-f_[51] = sigma*(I_34+I_43)-beta*delta*R_34*(I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341+I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342)-mu*R_34;
-f_[52] = sigma*I_4-beta*delta*R_4*(I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341+I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342+I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243)-mu*R_4;
-f_[53] = R_1+R_2+R_3+R_4+R_12+R_13+R_14+R_23+R_24+R_34+R_123+R_124+R_134+R_234+R_1234;
-f_[54] = -beta*S*(I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341+I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342+I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243+I_4+I_14+I_24+I_34+I_124+I_134+I_234+I_1234)+mu*N-mu*S;
+f_[32] = sigma*I_1-beta*delta*R_1*(I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342+I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243+I_4+I_14+I_24+I_34+I_124+I_134+I_234+I_1234)-mu*R_1;
+f_[33] = sigma*(I_12+I_21)-beta*delta*R_12*(I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243+I_4+I_14+I_24+I_34+I_124+I_134+I_234+I_1234)-mu*R_12;
+f_[34] = sigma*(I_123+I_132+I_231)-beta*delta*R_123*(I_4+I_14+I_24+I_34+I_124+I_134+I_234+I_1234)-mu*R_123;
+f_[35] = sigma*(I_1234+I_1243+I_1342+I_2341)-mu*R_1234;
+f_[36] = sigma*(I_124+I_241+I_142)-beta*delta*R_124*(I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243)-mu*R_124;
+f_[37] = sigma*(I_13+I_31)-beta*delta*R_13*(I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342+I_4+I_14+I_24+I_34+I_124+I_134+I_234+I_1234)-mu*R_13;
+f_[38] = sigma*(I_134+I_341+I_143)-beta*delta*R_134*(I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342)-mu*R_134;
+f_[39] = sigma*(I_14+I_41)-beta*delta*R_14*(I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342+I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243)-mu*R_14;
+f_[40] = sigma*I_2-beta*delta*R_2*(I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341+I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243+I_4+I_14+I_24+I_34+I_124+I_134+I_234+I_1234)-mu*R_2;
+f_[41] = sigma*(I_23+I_32)-beta*delta*R_23*(I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341+I_4+I_14+I_24+I_34+I_124+I_134+I_234+I_1234)-mu*R_23;
+f_[42] = sigma*(I_234+I_342+I_243)-beta*delta*R_234*(I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342)-mu*R_134;
+f_[43] = sigma*(I_24+I_42)-beta*delta*R_24*(I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341+I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243)-mu*R_24;
+f_[44] = sigma*I_3-beta*delta*R_3*(I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341+I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342+I_4+I_14+I_24+I_34+I_124+I_134+I_234+I_1234)-mu*R_3;
+f_[45] = sigma*(I_34+I_43)-beta*delta*R_34*(I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341+I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342)-mu*R_34;
+f_[46] = sigma*I_4-beta*delta*R_4*(I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341+I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342+I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243)-mu*R_4;
+f_[47] = -beta*S*(I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341+I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342+I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243+I_4+I_14+I_24+I_34+I_124+I_134+I_234+I_1234)+mu*N-mu*S;
 
 }
 
@@ -308,56 +299,66 @@ double initcond(char *varname, double *p_, double *wk_, double *xv_) {
 	return gICs[30];
   else if (strcmp(varname, "I_43")==0)
 	return gICs[31];
-  else if (strcmp(varname, "I_a1")==0)
-	return gICs[32];
-  else if (strcmp(varname, "I_a2")==0)
-	return gICs[33];
-  else if (strcmp(varname, "I_a3")==0)
-	return gICs[34];
-  else if (strcmp(varname, "I_a4")==0)
-	return gICs[35];
-  else if (strcmp(varname, "I_all")==0)
-	return gICs[36];
-  else if (strcmp(varname, "N")==0)
-	return gICs[37];
   else if (strcmp(varname, "R_1")==0)
-	return gICs[38];
+	return gICs[32];
   else if (strcmp(varname, "R_12")==0)
-	return gICs[39];
+	return gICs[33];
   else if (strcmp(varname, "R_123")==0)
-	return gICs[40];
+	return gICs[34];
   else if (strcmp(varname, "R_1234")==0)
-	return gICs[41];
+	return gICs[35];
   else if (strcmp(varname, "R_124")==0)
-	return gICs[42];
+	return gICs[36];
   else if (strcmp(varname, "R_13")==0)
-	return gICs[43];
+	return gICs[37];
   else if (strcmp(varname, "R_134")==0)
-	return gICs[44];
+	return gICs[38];
   else if (strcmp(varname, "R_14")==0)
-	return gICs[45];
+	return gICs[39];
   else if (strcmp(varname, "R_2")==0)
-	return gICs[46];
+	return gICs[40];
   else if (strcmp(varname, "R_23")==0)
-	return gICs[47];
+	return gICs[41];
   else if (strcmp(varname, "R_234")==0)
-	return gICs[48];
+	return gICs[42];
   else if (strcmp(varname, "R_24")==0)
-	return gICs[49];
+	return gICs[43];
   else if (strcmp(varname, "R_3")==0)
-	return gICs[50];
+	return gICs[44];
   else if (strcmp(varname, "R_34")==0)
-	return gICs[51];
+	return gICs[45];
   else if (strcmp(varname, "R_4")==0)
-	return gICs[52];
-  else if (strcmp(varname, "R_all")==0)
-	return gICs[53];
+	return gICs[46];
   else if (strcmp(varname, "S")==0)
-	return gICs[54];
+	return gICs[47];
   else {
 	fprintf(stderr, "Invalid variable name %s for initcond call\n", varname);
 	return 0.0/0.0;
 	}
+}
+
+
+double m1(double __t__, double *p_, double *wk_, double *xv_) {
+
+
+return (__t__>5&&__t__<=20)*im ;
+
+}
+
+
+double m2(double __t__, double *p_, double *wk_, double *xv_) {
+
+
+return (__t__>40&&__t__<=55)*im ;
+
+}
+
+
+double m3(double __t__, double *p_, double *wk_, double *xv_) {
+
+
+return (__t__>50&&__t__<=65)*im ;
+
 }
 
 
@@ -427,60 +428,50 @@ int getindex(char *name, double *p_, double *wk_, double *xv_) {
 	return 30;
   else if (strcmp(name, "I_43")==0)
 	return 31;
-  else if (strcmp(name, "I_a1")==0)
-	return 32;
-  else if (strcmp(name, "I_a2")==0)
-	return 33;
-  else if (strcmp(name, "I_a3")==0)
-	return 34;
-  else if (strcmp(name, "I_a4")==0)
-	return 35;
-  else if (strcmp(name, "I_all")==0)
-	return 36;
-  else if (strcmp(name, "N")==0)
-	return 37;
   else if (strcmp(name, "R_1")==0)
-	return 38;
+	return 32;
   else if (strcmp(name, "R_12")==0)
-	return 39;
+	return 33;
   else if (strcmp(name, "R_123")==0)
-	return 40;
+	return 34;
   else if (strcmp(name, "R_1234")==0)
-	return 41;
+	return 35;
   else if (strcmp(name, "R_124")==0)
-	return 42;
+	return 36;
   else if (strcmp(name, "R_13")==0)
-	return 43;
+	return 37;
   else if (strcmp(name, "R_134")==0)
-	return 44;
+	return 38;
   else if (strcmp(name, "R_14")==0)
-	return 45;
+	return 39;
   else if (strcmp(name, "R_2")==0)
-	return 46;
+	return 40;
   else if (strcmp(name, "R_23")==0)
-	return 47;
+	return 41;
   else if (strcmp(name, "R_234")==0)
-	return 48;
+	return 42;
   else if (strcmp(name, "R_24")==0)
-	return 49;
+	return 43;
   else if (strcmp(name, "R_3")==0)
-	return 50;
+	return 44;
   else if (strcmp(name, "R_34")==0)
-	return 51;
+	return 45;
   else if (strcmp(name, "R_4")==0)
-	return 52;
-  else if (strcmp(name, "R_all")==0)
-	return 53;
+	return 46;
   else if (strcmp(name, "S")==0)
-	return 54;
+	return 47;
+  else if (strcmp(name, "N")==0)
+	return 48;
   else if (strcmp(name, "beta")==0)
-	return 55;
+	return 49;
   else if (strcmp(name, "delta")==0)
-	return 56;
+	return 50;
+  else if (strcmp(name, "im")==0)
+	return 51;
   else if (strcmp(name, "mu")==0)
-	return 57;
+	return 52;
   else if (strcmp(name, "sigma")==0)
-	return 58;
+	return 53;
   else {
 	fprintf(stderr, "Invalid name %s for getindex call\n", name);
 	return 0.0/0.0;

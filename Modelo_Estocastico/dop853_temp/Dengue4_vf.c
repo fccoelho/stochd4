@@ -39,8 +39,9 @@ double signum(double x)
 #define N	p_[0]
 #define beta	p_[1]
 #define delta	p_[2]
-#define mu	p_[3]
-#define sigma	p_[4]
+#define im	p_[3]
+#define mu	p_[4]
+#define sigma	p_[5]
 #define I_1	Y_[0]
 #define I_12	Y_[1]
 #define I_123	Y_[2]
@@ -101,6 +102,9 @@ double __rhs_if(int cond_, double e1_, double e2_, double *p_, double *wk_, doub
 double getbound(char *name, int which_bd, double *p_, double *wk_, double *xv_);
 double globalindepvar(double t, double *p_, double *wk_, double *xv_);
 double initcond(char *varname, double *p_, double *wk_, double *xv_);
+double m1(double __t__, double *p_, double *wk_, double *xv_);
+double m2(double __t__, double *p_, double *wk_, double *xv_);
+double m3(double __t__, double *p_, double *wk_, double *xv_);
 int getindex(char *name, double *p_, double *wk_, double *xv_);
 int heav(double x_, double *p_, double *wk_, double *xv_);
 
@@ -120,7 +124,7 @@ int N_EXTINPUTS = 0;
 
 void vfieldfunc(unsigned n_, unsigned np_, double t, double *Y_, double *p_, double *f_, unsigned wkn_, double *wk_, unsigned xvn_, double *xv_){
 
-f_[0] = beta*S*(I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341)-sigma*I_1-mu*I_1;
+f_[0] = m1(t, p_, wk_, xv_)+beta*S*(I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341)-sigma*I_1-mu*I_1;
 f_[1] = beta*delta*R_1*(I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342)-sigma*I_12-mu*I_12;
 f_[2] = beta*delta*R_12*(I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243)-sigma*I_123-mu*I_123;
 f_[3] = beta*delta*R_123*(I_4+I_14+I_24+I_34+I_124+I_134+I_234+I_1234)-sigma*I_1234-mu*I_1234;
@@ -133,7 +137,7 @@ f_[9] = beta*delta*R_134*(I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342)-sigma*I_1
 f_[10] = beta*delta*R_1*(I_4+I_14+I_24+I_34+I_124+I_134+I_234+I_1234)-sigma*I_14-mu*I_14;
 f_[11] = beta*delta*R_14*(I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342)-sigma*I_142-mu*I_142;
 f_[12] = beta*delta*R_14*(I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243)-sigma*I_143-mu*I_143;
-f_[13] = beta*S*(I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342)-sigma*I_2-mu*I_2;
+f_[13] = m2(t, p_, wk_, xv_)+beta*S*(I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342)-sigma*I_2-mu*I_2;
 f_[14] = beta*delta*R_2*(I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341)-sigma*I_21-mu*I_21;
 f_[15] = beta*delta*R_2*(I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243)-sigma*I_23-mu*I_23;
 f_[16] = beta*delta*R_23*(I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341)-sigma*I_231-mu*I_231;
@@ -142,7 +146,7 @@ f_[18] = beta*delta*R_234*(I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341)-sigma*I_
 f_[19] = beta*delta*R_2*(I_4+I_14+I_24+I_34+I_124+I_134+I_234+I_1234)-sigma*I_24-mu*I_24;
 f_[20] = beta*delta*R_24*(I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341)-sigma*I_241-mu*I_241;
 f_[21] = beta*delta*R_24*(I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243)-sigma*I_243-mu*I_243;
-f_[22] = beta*S*(I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243)-sigma*I_3-mu*I_3;
+f_[22] = m3(t, p_, wk_, xv_)+beta*S*(I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243)-sigma*I_3-mu*I_3;
 f_[23] = beta*delta*R_3*(I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341)-sigma*I_31-mu*I_31;
 f_[24] = beta*delta*R_3*(I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342)-sigma*I_32-mu*I_32;
 f_[25] = beta*delta*R_3*(I_4+I_14+I_24+I_34+I_124+I_134+I_234+I_1234)-sigma*I_34-mu*I_34;
@@ -334,6 +338,30 @@ double initcond(char *varname, double *p_, double *wk_, double *xv_) {
 }
 
 
+double m1(double __t__, double *p_, double *wk_, double *xv_) {
+
+
+return (__t__>5&&__t__<=20)*im ;
+
+}
+
+
+double m2(double __t__, double *p_, double *wk_, double *xv_) {
+
+
+return (__t__>40&&__t__<=55)*im ;
+
+}
+
+
+double m3(double __t__, double *p_, double *wk_, double *xv_) {
+
+
+return (__t__>50&&__t__<=65)*im ;
+
+}
+
+
 int getindex(char *name, double *p_, double *wk_, double *xv_) {
 
   if (strcmp(name, "I_1")==0)
@@ -438,10 +466,12 @@ int getindex(char *name, double *p_, double *wk_, double *xv_) {
 	return 49;
   else if (strcmp(name, "delta")==0)
 	return 50;
-  else if (strcmp(name, "mu")==0)
+  else if (strcmp(name, "im")==0)
 	return 51;
-  else if (strcmp(name, "sigma")==0)
+  else if (strcmp(name, "mu")==0)
 	return 52;
+  else if (strcmp(name, "sigma")==0)
+	return 53;
   else {
 	fprintf(stderr, "Invalid name %s for getindex call\n", name);
 	return 0.0/0.0;

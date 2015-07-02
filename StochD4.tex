@@ -75,20 +75,26 @@ state-transitions included in the model.
 
 The derivation of the stochastic model is based on the deterministic ordinary 
 differential equations below
+\begin{subequations}
 \begin{empheq}[left=\empheqlbrace]{align}
  \frac{dS}{dt} &= -\beta S I_{*i} -\mu S + \mu N \\
  \frac{dI_{i}}{dt} &= \beta S I_{*i} - (\sigma +\mu) I_i \\
- \frac{dI_{[i]j}}{dt} &= \beta \delta R_i I_{*j} - (\sigma +\mu) I_{[i]j} \\
+ \frac{dI_{[i]j}}{dt} &= \beta \delta R_i I_{*j} - (\sigma +\mu) I_{[i]j} 
+\\
  \frac{dI_{[ij]k}}{dt} &= \beta \delta R_ij I_{*k} - (\sigma +\mu) I_{[ij]k} \\
  \frac{dI_{[ijk]l}}{dt} &= \beta \delta R_ijk I_{*l} - (\sigma +\mu) 
 I_{[ijk]l}\\
- \frac{dR_i}{dt} &= \sigma I_i - \delta R_i (I_{*j} + I_{*k} + I_{*l}) -\mu R_i 
+\frac{dR_i}{dt} &= \sigma I_i - \delta R_i (I_{*j} + I_{*k} + 
+I_{*l}) -\mu R_i 
 \\
  \frac{dR_{ij}}{dt} &= \sigma I_{ij} - \delta R_{ij} (I_{*k} + I_{*l}) - \mu 
 R_{ij}\\
- \frac{dR_{ijk}}{dt} &= \sigma I_{ijk} - \delta R_{ijk} I_{*l} -\mu R_{ijk} \\
- \frac{dR_{ijkl}}{dt} &= \sigma I_{ijkl} - \mu R_{ijkl} 
+ \frac{dR_{ijk}}{dt} &= \sigma I_{ijk} - \delta R_{ijk} I_{*l} -\mu R_{ijk} 
+\\
+ \frac{dR_{ijkl}}{dt} &= \sigma I_{ijkl} - \mu R_{ijkl}
 \end{empheq}
+\label{eq:ode}
+\end{subequations}
 
 
 
@@ -286,6 +292,27 @@ S^2$.
 
 \section*{Numerical simulations}
 
+\subsection*{Deterministic model}
+
+To serve as background for the exploration of the stochastic dynamics we  will 
+first simulated the correpondent deterministic model of (\ref{eq:ode}). Figure 
+xx shows that with premanent partial cross immunity, along with separate 
+Introduction of each virus, we get damped oscillations, as long as we have 
+suffient demographical renewal of the population.
+
+\begin{figure}
+ \centering
+ \includegraphics[width=\textwidth]{./ode4.png}
+ % ode4.png: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=
+ \caption{Simulation with parameters as given in table \ref{tab:pars}. 
+Serotypes 4, 1, 2 and 3 were introduced separately a times 0, 5, 40 and 50, 
+respectively.}
+ \label{fig:ode4}
+\end{figure}
+
+
+
+\subsection*{SDE model}
 There are different approaches to simulate the proposed stochastic  models, the 
 Kolmogorov version, can be simulated using Gillespie's algorithm which works 
 well for small population sizes but becomes unwieldy for larger populations. 
@@ -304,7 +331,7 @@ The parameter values used for the numerical simulations can be found on table
 \begin{center}
 \begin{tabular}{lcl}
 Parameter & Value & Description\\ \hline
-$\beta$ & 400/52 & Transmission rate\\
+$\beta$ & 500/(N*52) & Transmission rate: 500 cases\/year\\
 $\delta$ & 0.2 & ×\\
 $\sigma$ & \mc{1}{l}{1/1.5} & ×\\
 $\mu$ & \mc{1}{l}{$\frac{1}{70\times 52}$} & mortality rate\\

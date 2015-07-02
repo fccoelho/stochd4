@@ -16,24 +16,30 @@ Model4st = dst.args(name='Dengue4')
 
 # Parameters
 Model4st.pars = {
-    'beta': 400/52,
+    'beta': 500/(50000*52), # 500 cases per year
     'N': 50000,
     'delta': 0.2,  # Cross-immunity protection
-    'mu': 1/(70*52),  # Mortality rate
-    'sigma': 1/1.5  # recovery rate
+    'mu': 1/(1*52),  # Mortality rate
+    'sigma': 1/1.5,  # recovery rate
+    'im': 500
 }
-
+# Functions
+Model4st.fnspecs = {'m1': (['t'], '(t>5 and t<=20)*im'),
+                    'm2': (['t'], '(t>40 and t<=55)*im'),
+                    'm3': (['t'], '(t>50 and t<=65)*im'),
+                    # 'm4': (['t'], '(t>60 and t<=75)*im')
+                    }
 # Equations
 Model4st.varspecs = {
     'S': '-beta * S * (I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341+\
          I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342+\
          I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243+\
          I_4+I_14+I_24+I_34+I_124+I_134+I_234+I_1234) + mu*N - mu*S',
-    'I_1': 'beta * S * (I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341)\
+    'I_1': 'm1(t)+beta * S * (I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341)\
           - sigma*I_1 - mu*I_1',
-    'I_2': 'beta * S * (I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342)\
+    'I_2': 'm2(t)+beta * S * (I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342)\
           - sigma*I_2 - mu*I_2',
-    'I_3': 'beta * S * (I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243)\
+    'I_3': 'm3(t)+beta * S * (I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243)\
           - sigma*I_3 - mu*I_3',
     'I_4': 'beta * S * (I_4+I_14+I_24+I_34+I_124+I_134+I_234+I_1234)\
            - sigma*I_4 - mu*I_4',
@@ -146,33 +152,54 @@ Model4st.varspecs = {
 }
 
 # Initial conditions
-Model4st.ics = {'S': 48000, 'I_1': 500, 'I_2': 500, 'I_3': 500, 'I_4': 500, 'R_1': 0, 'R_2': 0, 'R_3': 0, 'R_4': 0, 'I_12': 0, 'I_13': 0, 'I_14': 0, 'I_21': 0, 'I_23': 0, 'I_24': 0, 'I_31': 0, 'I_32': 0, 'I_34': 0, 'I_41': 0, 'I_42': 0, 'I_43': 0, 'R_12': 0, 'R_13': 0, 'R_14': 0, 'R_23': 0, 'R_24': 0, 'R_34': 0, 'I_231': 0, 'I_241': 0, 'I_341': 0, 'I_132': 0, 'I_142': 0, 'I_342': 0, 'I_123': 0, 'I_143': 0, 'I_243':0, 'I_124': 0, 'I_134': 0,
+Model4st.ics = {'S': 48000, 'I_1': 0, 'I_2': 0, 'I_3': 0, 'I_4': .01, 'R_1': 0, 'R_2': 0, 'R_3': 0, 'R_4': 0, 'I_12': 0, 'I_13': 0, 'I_14': 0, 'I_21': 0, 'I_23': 0, 'I_24': 0, 'I_31': 0, 'I_32': 0, 'I_34': 0, 'I_41': 0, 'I_42': 0, 'I_43': 0, 'R_12': 0, 'R_13': 0, 'R_14': 0, 'R_23': 0, 'R_24': 0, 'R_34': 0, 'I_231': 0, 'I_241': 0, 'I_341': 0, 'I_132': 0, 'I_142': 0, 'I_342': 0, 'I_123': 0, 'I_143': 0, 'I_243':0, 'I_124': 0, 'I_134': 0,
      'I_234': 0, 'R_123': 0, 'R_124': 0, 'R_134': 0, 'R_234': 0, 'I_1234': 0, 'I_1243': 0, 'I_1342': 0, 'I_1342': 0, 'I_2341': 0, 'R_1234': 0,
 # 'I_a1': 0, 'I_a2': 0, 'I_a3': 0, 'I_a4': 0, 'I_all': 2000, 'R_all': 0, 'N': 50000
                 }
 
 # Simulation
 dt = 0.1
-tf = 10
+tf = 300
+trange = np.arange(0, tf, dt)
 Model4st.tdomain = [0, tf]             # set the range of integration.
-ode  = dst.Generator.Dopri_ODEsystem(Model4st)
+# ode  = dst.Generator.Dopri_ODEsystem(Model4st)
+ode  = dst.Generator.Radau_ODEsystem(Model4st)
+# ode  = dst.Generator.Vode_ODEsystem(Model4st)
 ode.set(algparams={'max_pts': 2000000})
 traj = ode.compute('Dengue')              # integrate ODE
 pts  = traj.sample(dt=dt)
 
+I_a1 = np.zeros(len(pts['I_1']))
+I_a2 = np.zeros(len(pts['I_2']))
+I_a3 = np.zeros(len(pts['I_3']))
+I_a4 = np.zeros(len(pts['I_4']))
+
+print (len(trange), len(I_a1))
+if len(trange)> len(I_a1)-1:
+    trange = np.arange(0, tf, tf/(len(I_a1)-1))
+print (len(trange), len(I_a1))
+
+for s, t in pts.items():
+    if not s.startswith('I_'):
+        continue
+    if s.endswith('1'):
+        I_a1 += t
+    elif s.endswith('2'):
+        I_a2 += t
+    elif s.endswith('3'):
+        I_a3 += t
+    elif s.endswith('4'):
+        I_a4 += t
+I_all = I_a1 + I_a2 + I_a3 + I_a4
 
 # PyPlot commands
-# plt.plot(pts['I_a3'], label='I_a3');
-for k in pts.keys():
-    if k =="I_a4": continue
-    if k.startswith('I_') and k.endswith('4'):
-        plt.plot(pts[k], label=k)
-# plt.plot(pts['I_a1'], label='I_a1')
-# plt.plot(pts['I_a2'], label='I_a2')
-# plt.plot(pts['I_a3'], label='I_a3')
-# plt.plot(pts['I_a4'], label='I_a4')
-# plt.plot(pts['R_all'], label='R')
-plt.xlabel('t');                              # Axes labels
+# plt.plot(pts['S'], label='S');
+plt.plot(trange, I_a1[:-1], label=r'$I_{a1}$')
+plt.plot(trange, I_a2[:-1], label=r'$I_{a2}$')
+plt.plot(trange, I_a3[:-1], label=r'$I_{a3}$')
+plt.plot(trange, I_a4[:-1], label=r'$I_{a4}$')
+plt.plot(trange, I_all[:-1], label='I')
+plt.xlabel('t (weeks)');                              # Axes labels
 plt.ylabel('individuals');                           # ...
 #plt.ylim([0,65]);                                # Range of the y axis
 plt.title(ode.name)

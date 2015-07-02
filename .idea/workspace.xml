@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5a40f08d-fcc6-474b-b740-c220f696ae15" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/StochD4.pdf" afterPath="$PROJECT_DIR$/StochD4.pdf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Modelo_Estocastico/4strain-ODE.py" afterPath="$PROJECT_DIR$/Modelo_Estocastico/4strain-ODE.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Modelo_Estocastico/dop853_temp/Dengue4_vf.c" afterPath="$PROJECT_DIR$/Modelo_Estocastico/dop853_temp/Dengue4_vf.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Modelo_Estocastico/radau5_temp/Dengue4_vf.c" afterPath="$PROJECT_DIR$/Modelo_Estocastico/radau5_temp/Dengue4_vf.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/StochD4.tex" afterPath="$PROJECT_DIR$/StochD4.tex" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Dengue multi-strain Stochastic.iws" />
@@ -20,7 +23,7 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/Dengue multi-strain Stochastic$SDE_alt4.coverage" NAME="SDE_alt4 Coverage Results" MODIFIED="1427379852325" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../Dengue multi-strain Stochastic/Modelo Estocastico" />
     <SUITE FILE_PATH="coverage/Dengue multi-strain Stochastic$ItoSDE.coverage" NAME="ItoSDE Coverage Results" MODIFIED="1427377743316" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../Dengue multi-strain Stochastic/Modelo Estocastico" />
-    <SUITE FILE_PATH="coverage/Dengue multi-strain Stochastic$4strain_ODE.coverage" NAME="4strain-ODE Coverage Results" MODIFIED="1435609208449" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Modelo_Estocastico" />
+    <SUITE FILE_PATH="coverage/Dengue multi-strain Stochastic$4strain_ODE.coverage" NAME="4strain-ODE Coverage Results" MODIFIED="1435861689244" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Modelo_Estocastico" />
     <SUITE FILE_PATH="coverage/Dengue multi-strain Stochastic$ITOSolvers.coverage" NAME="ITOSolvers Coverage Results" MODIFIED="1425991808276" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../Dengue multi-strain Stochastic/Modelo Estocastico" />
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -35,8 +38,8 @@
       <file leaf-file-name="4strain-ODE.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Modelo_Estocastico/4strain-ODE.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7125645">
-              <caret line="170" column="37" selection-start-line="170" selection-start-column="37" selection-end-line="170" selection-end-column="37" />
+            <state vertical-scroll-proportion="0.6394316">
+              <caret line="20" column="16" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="16" />
               <folding>
                 <element signature="e#161#183#0" expanded="true" />
               </folding>
@@ -88,8 +91,8 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="964" />
-    <option name="height" value="1054" />
+    <option name="width" value="1870" />
+    <option name="height" value="1026" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -426,7 +429,13 @@
       <option name="project" value="LOCAL" />
       <updated>1426022774587</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="FInished implementing the Deterministic version of the model">
+      <created>1435609272370</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1435609272370</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -450,21 +459,21 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="964" height="1054" extended-state="4" />
+    <frame x="0" y="0" width="1870" height="1026" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27850878" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12816282" sideWeight="0.49322033" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993197" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29801324" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3289183" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32801822" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32801822" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12816282" sideWeight="0.5067797" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39909297" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39863327" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993197" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -490,26 +499,41 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Ported the Sage code to sympy to facilitate running the simulation directly from the console" />
     <MESSAGE value="Added code to calculate the expectation vector" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added code to calculate the expectation vector" />
+    <MESSAGE value="FInished implementing the Deterministic version of the model" />
+    <option name="LAST_COMMIT_MESSAGE" value="FInished implementing the Deterministic version of the model" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager>
       <configuration name="PythonConfigurationType">
-        <watch expression="tuple(current_state)+params" language="Python" />
-        <watch expression="B(*args)" language="Python" />
-        <watch expression="mu(*(tuple(current_state)+params))" language="Python" />
+        <watch expression="x.shape" language="Python" />
+        <watch expression="y.shape" language="Python" />
       </configuration>
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Modelo_Estocastico/4strain-ODE.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#161#183#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Modelo_Estocastico/SDE_alt4.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="109" column="64" selection-start-line="109" selection-start-column="64" selection-end-line="109" selection-end-column="64" />
-          <folding>
-            <element signature="e#93#107#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -517,9 +541,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="66" column="89" selection-start-line="66" selection-start-column="89" selection-end-line="66" selection-end-column="89" />
-          <folding>
-            <element signature="e#206#218#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -527,9 +548,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="49" column="19" selection-start-line="49" selection-start-column="19" selection-end-line="49" selection-end-column="19" />
-          <folding>
-            <element signature="e#118#150#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -547,7 +565,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="585" column="8" selection-start-line="585" selection-start-column="8" selection-end-line="585" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -555,9 +572,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#93#107#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -572,9 +586,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="179" column="53" selection-start-line="179" selection-start-column="53" selection-end-line="179" selection-end-column="53" />
-          <folding>
-            <element signature="e#206#218#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -582,9 +593,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="49" column="19" selection-start-line="49" selection-start-column="19" selection-end-line="49" selection-end-column="19" />
-          <folding>
-            <element signature="e#118#150#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -592,7 +600,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="585" column="8" selection-start-line="585" selection-start-column="8" selection-end-line="585" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -600,9 +607,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#93#107#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -610,7 +614,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="581" column="0" selection-start-line="581" selection-start-column="0" selection-end-line="581" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -625,9 +628,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#206#218#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -635,9 +635,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="63" column="17" selection-start-line="63" selection-start-column="17" selection-end-line="63" selection-end-column="17" />
-          <folding>
-            <element signature="e#118#150#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -645,9 +642,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#93#107#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -655,7 +649,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="581" column="0" selection-start-line="581" selection-start-column="0" selection-end-line="581" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -670,9 +663,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#206#218#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -680,9 +670,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="63" column="17" selection-start-line="63" selection-start-column="17" selection-end-line="63" selection-end-column="17" />
-          <folding>
-            <element signature="e#118#150#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -690,9 +677,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#93#107#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -700,7 +684,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="581" column="0" selection-start-line="581" selection-start-column="0" selection-end-line="581" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -715,9 +698,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="182" column="11" selection-start-line="182" selection-start-column="11" selection-end-line="182" selection-end-column="11" />
-          <folding>
-            <element signature="e#206#218#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -725,9 +705,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="63" column="17" selection-start-line="63" selection-start-column="17" selection-end-line="63" selection-end-column="17" />
-          <folding>
-            <element signature="e#118#150#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -763,7 +740,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="585" column="8" selection-start-line="585" selection-start-column="8" selection-end-line="585" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -771,9 +747,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0929432">
           <caret line="49" column="19" selection-start-line="49" selection-start-column="19" selection-end-line="49" selection-end-column="19" />
-          <folding>
-            <element signature="e#118#150#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -781,9 +754,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.30981067">
           <caret line="66" column="89" selection-start-line="66" selection-start-column="89" selection-end-line="66" selection-end-column="89" />
-          <folding>
-            <element signature="e#206#218#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -791,9 +761,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3717728">
           <caret line="109" column="64" selection-start-line="109" selection-start-column="64" selection-end-line="109" selection-end-column="64" />
-          <folding>
-            <element signature="e#93#107#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -805,10 +772,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file:///usr/lib/python3/dist-packages/matplotlib/axes/_base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.29662523">
+          <caret line="222" column="0" selection-start-line="222" selection-start-column="0" selection-end-line="222" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.4/dist-packages/PyDSTool-0.90.0-py3.4.egg/PyDSTool/Generator/baseclasses.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3321492">
+          <caret line="1380" column="0" selection-start-line="1380" selection-start-column="0" selection-end-line="1380" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.4/dist-packages/PyDSTool-0.90.0-py3.4.egg/PyDSTool/Generator/ODEsystem.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3321492">
+          <caret line="524" column="0" selection-start-line="524" selection-start-column="0" selection-end-line="524" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.4/dist-packages/PyDSTool-0.90.0-py3.4.egg/PyDSTool/Generator/Dopri_ODEsystem.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.0035524">
+          <caret line="990" column="0" selection-start-line="990" selection-start-column="0" selection-end-line="990" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Modelo_Estocastico/4strain-ODE.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7125645">
-          <caret line="170" column="37" selection-start-line="170" selection-start-column="37" selection-end-line="170" selection-end-column="37" />
+        <state vertical-scroll-proportion="0.6394316">
+          <caret line="20" column="16" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="16" />
           <folding>
             <element signature="e#161#183#0" expanded="true" />
           </folding>
