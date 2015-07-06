@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5a40f08d-fcc6-474b-b740-c220f696ae15" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/StochD4.pdf" afterPath="$PROJECT_DIR$/StochD4.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Modelo_Estocastico/4strain-ODE.py" afterPath="$PROJECT_DIR$/Modelo_Estocastico/4strain-ODE.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Modelo_Estocastico/radau5_temp/Dengue4_vf.c" afterPath="$PROJECT_DIR$/Modelo_Estocastico/radau5_temp/Dengue4_vf.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Modelo_Estocastico/Dengue_full4.psc" afterPath="$PROJECT_DIR$/Modelo_Estocastico/Dengue_full4.psc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Modelo_Estocastico/SDE_alt4.py" afterPath="$PROJECT_DIR$/Modelo_Estocastico/SDE_alt4.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/StochD4.tex" afterPath="$PROJECT_DIR$/StochD4.tex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/stochd.bib" afterPath="$PROJECT_DIR$/stochd.bib" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="5a40f08d-fcc6-474b-b740-c220f696ae15" name="Default" comment="" />
     <ignored path="Dengue multi-strain Stochastic.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -74,7 +65,7 @@
       <file leaf-file-name="SDE_alt4.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Modelo_Estocastico/SDE_alt4.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.67005074">
+            <state vertical-scroll-proportion="0.68041235">
               <caret line="103" column="46" selection-start-line="103" selection-start-column="46" selection-end-line="103" selection-end-column="46" />
               <folding />
             </state>
@@ -207,24 +198,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Modelo_Estocastico" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Dengue multi-strain Stochastic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Dengue_multi-strain_Stochastic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modelo_Estocastico" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="radau5_temp" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -564,18 +537,18 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="956" y="0" width="962" height="1054" extended-state="5" />
-    <editor active="true" />
+    <frame x="956" y="0" width="962" height="1054" extended-state="4" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25548247" sideWeight="0.487055" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25548247" sideWeight="0.48768473" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993197" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29801324" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32801822" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3178808" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25548247" sideWeight="0.512945" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32781458" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3178808" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25548247" sideWeight="0.5123153" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32801822" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39845476" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -1023,7 +996,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Modelo_Estocastico/SDE_alt4.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.67005074">
+        <state vertical-scroll-proportion="0.68041235">
           <caret line="103" column="46" selection-start-line="103" selection-start-column="46" selection-end-line="103" selection-end-column="46" />
           <folding />
         </state>
