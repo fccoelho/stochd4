@@ -574,14 +574,14 @@ I2341 = 0
 R1234 = 0
 
 #InitPar
-mu = 1.0/(70*52) #70 years in weeks
-beta = 400/52.0
+mu = 1.0/(1*52) #70 years in weeks
+beta = 500/(50000*52.0)
 phi = 1
 sigma = 1/1.5
 gamma = 1
 delta = 0.2
 
 
-Event: denv4, _TIME_ > 4000 , 0 {
-I4 = 500
-}
+#Event: denv4, _TIME_ > 400 , 0 {
+#I4 = 500
+#}

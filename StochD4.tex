@@ -1,4 +1,3 @@
-
 \documentclass[12pt]{article}              
 \usepackage[margin=2.0cm]{geometry}
 \usepackage{setspace,relsize}               
@@ -99,11 +98,12 @@ R_{ij}\\
 
 
 
-          \begin{figure}
+\begin{figure}
  \centering
  \includegraphics[width=16cm]{Dengue4.png}
 
- \caption{Block diagram detailing the stochastic model. Infected individuals 
+ \caption{\textbf{Block diagram detailing the stochastic model.} Infected 
+individuals 
 with different Dengue viruses are represented by different colors. Infections 
 are also represented by colored arrows matching the virus type.}
  \label{fig:sde_blocks}
@@ -305,9 +305,9 @@ suffient demographical renewal of the population.
  \includegraphics[width=\textwidth]{./ode4.png}
  % ode4.png: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=
  \caption{Simulation with parameters as given in table \ref{tab:pars}. 
-Serotypes 4, 1, 2 and 3 were introduced separately a times 0, 5, 40 and 50, 
+Serotypes 4, 1, 2 and 3 were introduced separately a times 0, 5, 10 and 15, 
 respectively.}
- \label{fig:ode4}
+ \label{fig:odesim4}
 \end{figure}
 
 
@@ -322,6 +322,34 @@ number of solvers available for their simulation
 \citep{higham_algorithmic_2001}.
 
 The parameter values used for the numerical simulations can be found on table 
+\ref{tab:pars}. The simulations presented here were done with the Stochpy 
+solver \citep{maarleveld_stochpy:_2013}.
+
+On figure \ref{fig:sde4_I} we can see that the SDE dynamics converges on average 
+to the same endemic equilibrium as the ODE model, but it sustains the 
+oscillations a lot longer, although the oscilations are of much lower 
+amplitude. Another interesting feature is that in the SDE model we can see 
+alternating serotypes even though they are introduced simultaneously (see fig. 
+\ref{fig:sde4_I_detail}).
+
+\begin{figure}
+ \centering
+ \includegraphics[width=\textwidth]{./I_4types.png}
+ % I_4types.png: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=
+ \caption{Total infected with each serotype.}
+ \label{fig:sde4_I}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \includegraphics[width=\textwidth]{./I_4types_detail.png}
+ % I_4types_detail.png: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=
+ \caption{Detail of figure \ref{fig:sde4_I}. Notice the sustained oscillations 
+even after a 1000 weeks.}
+ \label{fig:sde4_I_detail}
+\end{figure}
+
+
 
 {%
 \newcommand{\mc}[3]{\multicolumn{#1}{#2}{#3}}

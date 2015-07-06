@@ -349,7 +349,7 @@ return (__t__>5&&__t__<=20)*im ;
 double m2(double __t__, double *p_, double *wk_, double *xv_) {
 
 
-return (__t__>40&&__t__<=55)*im ;
+return (__t__>10&&__t__<=25)*im ;
 
 }
 
@@ -357,7 +357,7 @@ return (__t__>40&&__t__<=55)*im ;
 double m3(double __t__, double *p_, double *wk_, double *xv_) {
 
 
-return (__t__>50&&__t__<=65)*im ;
+return (__t__>15&&__t__<=30)*im ;
 
 }
 

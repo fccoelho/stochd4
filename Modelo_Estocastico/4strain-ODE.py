@@ -25,8 +25,8 @@ Model4st.pars = {
 }
 # Functions
 Model4st.fnspecs = {'m1': (['t'], '(t>5 and t<=20)*im'),
-                    'm2': (['t'], '(t>40 and t<=55)*im'),
-                    'm3': (['t'], '(t>50 and t<=65)*im'),
+                    'm2': (['t'], '(t>10 and t<=25)*im'),
+                    'm3': (['t'], '(t>15 and t<=30)*im'),
                     # 'm4': (['t'], '(t>60 and t<=75)*im')
                     }
 # Equations
@@ -141,14 +141,7 @@ Model4st.varspecs = {
             -sigma*I_1342 - mu*I_1342',
     'I_2341': 'beta*delta*R_234*(I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341)\
             -sigma*I_2341 - mu*I_2341',
-    'R_1234': 'sigma*(I_1234+I_1243+I_1342+I_2341) - mu*R_1234',
-    # 'I_a1': 'I_1+I_21+I_31+I_41+I_231+I_241+I_341+I_2341',
-    # 'I_a2': 'I_2+I_12+I_32+I_42+I_132+I_142+I_342+I_1342',
-    # 'I_a3': 'I_3+I_13+I_23+I_43+I_123+I_143+I_243+I_1243',
-    # 'I_a4': 'I_4+I_14+I_24+I_34+I_124+I_134+I_234+I_1234',
-    # 'I_all': 'I_a1+I_a2+I_a3+I_a4',
-    # 'R_all': 'R_1+R_2+R_3+R_4+R_12+R_13+R_14+R_23+R_24+R_34+R_123+R_124+R_134+R_234+R_1234',
-    # 'N': 'S+I_all+R_all'
+    'R_1234': 'sigma*(I_1234+I_1243+I_1342+I_2341) - mu*R_1234'
 }
 
 # Initial conditions
@@ -194,15 +187,16 @@ I_all = I_a1 + I_a2 + I_a3 + I_a4
 
 # PyPlot commands
 # plt.plot(pts['S'], label='S');
-plt.plot(trange, I_a1[:-1], label=r'$I_{a1}$')
-plt.plot(trange, I_a2[:-1], label=r'$I_{a2}$')
-plt.plot(trange, I_a3[:-1], label=r'$I_{a3}$')
-plt.plot(trange, I_a4[:-1], label=r'$I_{a4}$')
-plt.plot(trange, I_all[:-1], label='I')
+plt.plot(trange, I_a1[:-1], label=r'$I_{*1}$')
+plt.plot(trange, I_a2[:-1], label=r'$I_{*2}$')
+plt.plot(trange, I_a3[:-1], label=r'$I_{*3}$')
+plt.plot(trange, I_a4[:-1], label=r'$I_{*4}$')
+plt.plot(trange, I_all[:-1], label=r'$I_*$')
 plt.xlabel('t (weeks)');                              # Axes labels
 plt.ylabel('individuals');                           # ...
 #plt.ylim([0,65]);                                # Range of the y axis
 plt.title(ode.name)
 plt.legend(loc=0)
 plt.grid()
+plt.savefig('ode4.png', dpi=300)
 plt.show()
